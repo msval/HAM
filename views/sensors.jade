@@ -3,4 +3,5 @@ extends layout
 block content
   h1= title
   each row in rows
-   p= row.name
+   input(type=text, value='#{row.name}')
+   br
