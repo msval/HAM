@@ -3,6 +3,17 @@ extends layout
 block content
   h1= title
   each row in rows
-   input(type=text, value='#{row.name}')
+   input(type=text, value='#{row.name}', data-id='#{row.id}')
    button Save
    br
+  h2 Add new
+  input(type=text, id="addNewInput")
+  button(id='addNew') Add
+  script.
+   $(function(){
+    $('#addNew').on('click', function () {
+     $.post('add', {
+      name: $('#addNewInput').val()
+     });
+    });
+   });
