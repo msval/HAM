@@ -3,7 +3,7 @@ extends layout
 block content
   h1= title
   each row in rows
-   input(type=text, value='#{row.name}')
+   input(type=text, value='#{row.name}', id='button#{row.id}')
    button(data-id='#{row.id}', class='saveButton') Update
    button(data-id='#{row.id}', class='deleteButton') Delete
    br
@@ -14,11 +14,15 @@ block content
   script.
    $(function(){
     $('.saveButton').on('click', function () {
-     alert($(this).data('id'));
+     $.post('sensors/update', {
+      id: $(this).data('id'),
+      name: $('#button' + $(this).data('id')).val()
+     });
+     location.reload();
     });
 
     $('.deleteButton').on('click', function () {
-     alert($(this).data('id'));
+     $.post('sensors/del', {id: $(this).data('id')});
+     location.reload();
     });
-    
    });
